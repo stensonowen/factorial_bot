@@ -1,10 +1,30 @@
 #!/usr/bin/python
 
 import re
-from math import factorial
+from math import factorial #gotta save those milliseconds
+#from mpmath import pi, e, mpf, sqrt, mp
+import mpmath
 
 fact_ptn = re.compile("\d{1,3}(,?\d{3})*!")
 text = "the quick brown fox 1,111! jumps over 1!111,111!!1111! the lazy dog"
+
+#set unnecessary precision:
+mpmath.mp.dps = 10  #make higher for larger numbers?
+
+def round_off(x):
+    #round mp float to nearest ones place
+    #probably a better way to do this
+    return mpmath.floor(x + mpf(.5))
+
+def stirling(x):
+    #uses Stirling's approximation
+    #n = mpf(x)
+    #c = mpf(2)*pi*n
+    #b = n/e
+    n = mpmath.mpf(x)
+    b = n / mpmath.e
+    return mpmath.sqrt(2 * mpmath.pi * n) * b**n
+    
 
 def extract(text):
     #all matches will end in exclamation marks
@@ -28,6 +48,6 @@ def findall(pattern, text):
         m = pattern.search(text, offset)
     return matches
 
-matches = findall(fact_ptn, text)
-matches = [extract(m) for m in matches]
-print matches
+#matches = findall(fact_ptn, text)
+#matches = [extract(m) for m in matches]
+#print matches
