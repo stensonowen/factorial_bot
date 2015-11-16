@@ -4,12 +4,20 @@ import re
 from math import factorial #gotta save those milliseconds
 #from mpmath import pi, e, mpf, sqrt, mp
 import mpmath
+import praw, info
 
 fact_ptn = re.compile("\d{1,3}(,?\d{3})*!")
 text = "the quick brown fox 1,111! jumps over 1!111,111!!1111! the lazy dog"
 
 #set unnecessary precision:
 mpmath.mp.dps = 10  #make higher for larger numbers?
+
+def login():
+    #pretty sure I read somewhere that praw will auto re-login after expiration
+    r = praw.Reddit(info.app_ua)
+    r.set_oauth_app_info(info.app_id, info.app_secret, info.app_uri)
+    r.refresh_access_information(info.app_refresh)
+    return r
 
 def round_off(x):
     #round mp float to nearest ones place
@@ -51,3 +59,10 @@ def findall(pattern, text):
 #matches = findall(fact_ptn, text)
 #matches = [extract(m) for m in matches]
 #print matches
+
+r = login()
+s = r.get_subreddit('gifs')
+p = list(s.get_comments(limit=100))
+p.reverse()
+
+print p[0].id
