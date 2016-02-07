@@ -76,11 +76,10 @@ Translations = {
     'and': '',
 }
 
-valid_tokens = set("hundred")
+valid_tokens = set(["hundred"])
 #100 is a weird corner case so it's not in above dictionaries
 for d in [Small, Magnitude, Translations]:
     valid_tokens = valid_tokens.union(set(d.keys()))
-print("hundred" in valid_tokens)
 
 class NumberException(Exception):
     def __init__(self, msg):
@@ -106,12 +105,12 @@ def extract(text):
     tokens = prep(text)
     first = len(tokens)
     for i in range(len(tokens))[::-1]:
-        print(tokens[i] + " in valid: " + str(tokens[i] in valid_tokens))
+        #print(tokens[i] + " in valid: " + str(tokens[i] in valid_tokens))
         if tokens[i] in valid_tokens:
             first = i
         else:
             break
-    print('_'.join(tokens[first:]))
+    #print('_'.join(tokens[first:]))
     return text2num(tokens[first:])
 
 def atoi(text):
@@ -120,6 +119,7 @@ def atoi(text):
     return result
 
 def text2num(tokens):
+    #TODO: allow mix of digits and words
     n = 0
     g = 0
     for w in tokens:
