@@ -1,0 +1,6 @@
+#files to not accidentally commit:
+info.py
+test.py
+
+#types to not accidentally commit:
+*.sqlite
