@@ -2,8 +2,8 @@
 
 from math import factorial #gotta save those milliseconds
 import mpmath
-import praw, info
-import sqlite3
+import praw, info, sqlite3
+import atoi
 
 fact_ptn = re.compile("\d{1,3}(,?\d{3})*!")
 
@@ -36,11 +36,19 @@ def stirling(x):
     expon = mpmath.power(n/mpmath.e, n) 
     return coeff * expon
     
-def extract(text):
-    return text
-
-def findall(pattern, text):
-    return
+def findall(comment):
+    numbers = []
+    start = 0
+    while True:
+        end = comment.find(start, '!')
+        if i == -1:
+            return numbers
+        result = atoi.extract(comment[start:end])
+        if result is not None:
+            numbers.append(result)
+        start = end + 1
+    return numbers
+        
 
 def get_comments(r, cur):
     #return comments that haven't been seen before
