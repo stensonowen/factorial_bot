@@ -94,13 +94,13 @@ def text2num(tokens):
     return n + g
     
 if __name__ == "__main__":
-    assert 1 == text2num("one")
-    assert 12 == text2num("twelve")
-    assert 72 == text2num("seventy two")
-    assert 300 == text2num("three hundred")
-    assert 1200 == text2num("twelve hundred")
-    assert 12304 == text2num("twelve thousand three hundred four")
-    assert 6000000 == text2num("six million")
-    assert 6400005 == text2num("six million four hundred thousand five")
-    assert 123456789012 == text2num("one hundred twenty three billion four hundred fifty six million seven hundred eighty nine thousand twelve")
-    assert 4000000000000000000000000000000000 == text2num("four decillion")
+    assert 1 == text2num("one".split())
+    assert 12 == text2num("twelve".split())
+    assert 72 == text2num("seventy two".split())
+    assert 300 == text2num("three hundred".split())
+    assert 1200 == text2num("twelve hundred".split())
+    assert 12304 == text2num("twelve thousand three hundred four".split())
+    assert 6000000 == text2num("six million".split())
+    assert 6400005 == text2num("six million four hundred thousand five".split())
+    assert 123456789012 == text2num("one hundred twenty three billion four hundred fifty six million seven hundred eighty nine thousand twelve".split())
+    assert 4000000000000000000000000000000000 == text2num("four decillion".split())
